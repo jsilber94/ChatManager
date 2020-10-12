@@ -4,7 +4,8 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
-import java.io.PrintWriter;
+import java.util.ArrayList;
+import java.util.List;
 
 @WebServlet(name = "ChatServlet")
 public class ChatServlet extends HttpServlet {
@@ -16,51 +17,27 @@ public class ChatServlet extends HttpServlet {
         String to = request.getParameter("to");
         String format = request.getParameter("format");
 
-        String messageResponse = determineResponse(from, to, format);
+        List<String> messageResponse = determineResponse(from, to, format);
 
-//        if (format != null && format.equals("xml"))
-//            response.setContentType("text/xml");
-//        else
-//            response.setContentType("text/plain");
-
-//        response.setContentType("text/html");
-//        PrintWriter out = response.getWriter();
-//        out.println(messageResponse);
-//
-//        request.getRequestDispatcher("index.html").include(request, response);
-//        out.close();
-//        response.reset();
+        response.setContentType("text/xml");
+        request.setAttribute("messages", messageResponse);
+        request.getRequestDispatcher("/index.jsp").forward(request, response);
 
     }
 
-    protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+    protected void doPost(HttpServletRequest request, HttpServletResponse response) {
         String user = request.getParameter("user");
         String message = request.getParameter("message");
 
-        Message newMessage = new Message(message);
+        Message newMessage = new Message(message, user != null ? user : "Anonymous");
         chatManager.addMessage(newMessage);
-        if (user != null)
-            chatManager.addUser(user);
-        else
-            chatManager.addUser("Anonymous");
 
-
-//        response.setContentType("text/html");
-//        PrintWriter out = response.getWriter();
-//        out.println(newMessage.toString());
-//
-//        request.getRequestDispatcher("index.html").include(request, response);
-//        out.close();
-//        response.reset();
-
+        response.setStatus(response.SC_NO_CONTENT);
     }
 
-    protected void doDelete(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
-        chatManager.clearChat();
-    }
 
-    private String determineResponse(String from, String to, String format) {
-        String messageResponse = "";
+    private List<String> determineResponse(String from, String to, String format) {
+        List<String> messageResponse = new ArrayList<>();
 
         if (format == null && from == null && to == null) {
             messageResponse = chatManager.getAllMessagesWithinRange("plain-text");

@@ -4,25 +4,28 @@ import java.time.LocalTime;
 
 public class Message {
     String message;
+    String user;
+    LocalDateTime dateTime;
     private LocalDate date;
     private LocalTime time;
 
-    LocalDateTime dateTime;
-
-    public Message(String message) {
+    public Message(String message, String user) {
         this.message = message;
+        this.user = user;
         this.date = LocalDate.now();
         this.time = LocalTime.now();
     }
 
-    public LocalDate getDate(){
+    public LocalDate getDate() {
         return this.date;
     }
-    public LocalTime getTime(){
+
+    public LocalTime getTime() {
         return this.time;
     }
+
     public String toString() {
-        return message + date.toString() + time.toString();
+        return user + ": " + message;
     }
 
 

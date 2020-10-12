@@ -6,26 +6,21 @@ public class ChatManager {
 
 
     private final String defaultFormat = "plain-text";
-    private List<String> users = new ArrayList<>();
     private List<Message> messages = new ArrayList<>();
-
-    public void addUser(String user) {
-        users.add(user);
-    }
 
     public void addMessage(Message message) {
         messages.add(message);
     }
 
-    public String getAllMessagesWithinRange(String format) {
+    public List<String> getAllMessagesWithinRange(String format) {
         return formatMessage(messages, format);
     }
 
-    public String getAllMessagesWithinRange(String from, String to) {
+    public List<String> getAllMessagesWithinRange(String from, String to) {
         return getAllMessagesWithinRange(from, to, defaultFormat);
     }
 
-    public String getAllMessagesWithinRange(String from, String to, String format) {
+    public List<String> getAllMessagesWithinRange(String from, String to, String format) {
         List<Message> messagesToSend = new ArrayList<>();
         for (Message message : messages) {
             if (LocalDate.parse(message.getDate().toString()).isAfter(LocalDate.parse(from)) || LocalDate.parse(message.getDate().toString()).isAfter(LocalDate.parse(to)))
@@ -35,26 +30,29 @@ public class ChatManager {
         return formatMessage(messagesToSend, format);
     }
 
-    private String formatMessage(List<Message> messages, String format) {
-        StringBuilder messagesToSend = new StringBuilder();
-        if (format.equals("xml")) {
-            messagesToSend.append("<?xml version=\"1.0\" encoding=\"UTF-8\"?>");
-            messagesToSend.append("<Messages>");
-            for (Message message : messages) {
-                messagesToSend.append("<Message>").append(message.toString()).append("</Message>");
-            }
-            messagesToSend.append("</Messages>");
-        } else {
-            for (Message message : messages)
-                messagesToSend.append(message.toString()).append('\n');
-        }
+    private List<String> formatMessage(List<Message> messages, String format) {
 
+        List<String> stringMessages = new ArrayList<>();
 
-        return messagesToSend.toString();
+        for(Message message: messages)
+            stringMessages.add(message.toString());
+//        StringBuilder messagesToSend = new StringBuilder();
+//        if (format.equals("xml")) {
+//            messagesToSend.append("<?xml version=\"1.0\" encoding=\"UTF-8\"?>");
+//            messagesToSend.append("<Messages>");
+//            for (Message message : messages) {
+//                messagesToSend.append("<Message>").append(message.toString()).append("</Message>");
+//            }
+//            messagesToSend.append("</Messages>");
+//        } else {
+//            for (Message message : messages)
+//                messagesToSend.append(message.toString()).append('\n');
+//        }
+
+        return stringMessages;
     }
 
     public void clearChat() {
-        users = new ArrayList<>();
         messages = new ArrayList<>();
     }
 }
