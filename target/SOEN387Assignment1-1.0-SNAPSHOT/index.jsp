@@ -61,8 +61,8 @@
     </div>
     <div class="row">
         <div class="col-12">
-            <a href="">
-                <i class="material-icons">delete</i>
+            <a href="ChatServlet?from=1990-01-01&to=2021-01-01&format=text">
+                <i class="material-icons">refresh</i>
             </a>
         </div>
     </div>

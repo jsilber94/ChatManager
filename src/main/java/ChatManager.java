@@ -6,12 +6,7 @@ public class ChatManager {
 
 
     private final String defaultFormat = "plain-text";
-    private List<String> users = new ArrayList<>();
     private List<Message> messages = new ArrayList<>();
-
-    public void addUser(String user) {
-        users.add(user);
-    }
 
     public void addMessage(Message message) {
         messages.add(message);
@@ -55,11 +50,9 @@ public class ChatManager {
 //        }
 
         return stringMessages;
-//        return messagesToSend.toString();
     }
 
     public void clearChat() {
-        users = new ArrayList<>();
         messages = new ArrayList<>();
     }
 }
