@@ -27,7 +27,7 @@ public class ChatServlet extends HttpServlet {
         PrintWriter out = response.getWriter();
         out.println(messageResponse);
 
-        request.getRequestDispatcher("index.html").include(request, response);
+        request.getRequestDispatcher("/index.jsp").include(request, response);
         out.close();
         response.reset();
 
@@ -45,13 +45,13 @@ public class ChatServlet extends HttpServlet {
             chatManager.addUser("Anonymous");
 
 
-//        response.setContentType("text/html");
-//        PrintWriter out = response.getWriter();
-//        out.println(newMessage.toString());
-//
-//        request.getRequestDispatcher("index.html").include(request, response);
-//        out.close();
-//        response.reset();
+        response.setContentType("text/html");
+        PrintWriter out = response.getWriter();
+        out.println(newMessage.toString());
+
+        request.getRequestDispatcher("/index.jsp").include(request, response);
+        out.close();
+        response.reset();
 
     }
 

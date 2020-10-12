@@ -29,6 +29,9 @@
     </div>
 </div>
 
+<div>${result}</div>
+
+
 <div class="container">
     <div class="row no-gutters">
         <div class="form-group">
