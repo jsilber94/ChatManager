@@ -51,6 +51,9 @@ public class ChatServlet extends HttpServlet {
 
     }
 
+    protected void doDelete(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
+        chatManager.clearChat();
+    }
 
     private List<String> determineResponse(String from, String to, String format) {
         List<String> messageResponse = new ArrayList<>();
