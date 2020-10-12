@@ -12,27 +12,27 @@
 <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
 <link rel="stylesheet" href="style.scss">
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js" integrity="sha384-B4gt1jrGC7Jh4AgTPSdUtOBvfO8shuf57BaghqFfPlYxofvL8/KUEfYiJOMMV+rV" crossorigin="anonymous"></script>
+
 <body>
-<div class="container">
-    <div class="jumbotron">
-        <div class="form-group">
-            <form action="ChatServlet" method="get">
-                <label>From</label>
-                <input class="control-label" type="text" name="from"/>
-                <label>to</label>
-                <input class="control-label" type="text" name="to"/>
-                <label>format</label>
-                <input class="control-label" type="text" name="format"/>
-                <input type='submit' value='Make a get request'/>
-            </form>
+
+    <div class="container">
+        <div class="jumbotron">
+            <div class="form-group">
+                <form action="ChatServlet" method="get">
+                    <label>From</label>
+                    <input class="control-label" type="text" name="from"/>
+                    <label>to</label>
+                    <input class="control-label" type="text" name="to"/>
+                    <label>format</label>
+                    <input class="control-label" type="text" name="format"/>
+                    <input type='submit' value='Make a get request'/>
+                </form>
+            </div>
         </div>
     </div>
-</div>
-
-<div>${result}</div>
 
 
-<div class="container">
+    <div class="container">
     <div class="row no-gutters">
         <div class="form-group">
             <form action="ChatServlet" method="post">
@@ -50,8 +50,12 @@
     <div class="row no-gutters">
         <div class="col-md-3">
             <div class="chat-bubble chat-bubble--left">
-<%--                @<%= name %>: <%= message %>--%>
-                @mask: Yo yo yo yo yo this is a message
+
+                <c:forEach var="message" items="${requestScope.messages}">
+                    <c:out value="${message}"/>
+                    </br>
+                </c:forEach>
+
             </div>
         </div>
     </div>

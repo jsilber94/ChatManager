@@ -22,7 +22,8 @@ public class Message {
         return this.time;
     }
     public String toString() {
-        return message + date.toString() + time.toString();
+        return message;
+                //+ date.toString() + time.toString();
     }
 
 
