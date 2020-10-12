@@ -18,18 +18,18 @@ public class ChatServlet extends HttpServlet {
 
         String messageResponse = determineResponse(from, to, format);
 
-//        if (format != null && format.equals("xml"))
-//            response.setContentType("text/xml");
-//        else
-//            response.setContentType("text/plain");
+        if (format != null && format.equals("xml"))
+            response.setContentType("text/xml");
+        else
+            response.setContentType("text/plain");
 
-//        response.setContentType("text/html");
-//        PrintWriter out = response.getWriter();
-//        out.println(messageResponse);
-//
-//        request.getRequestDispatcher("index.html").include(request, response);
-//        out.close();
-//        response.reset();
+        response.setContentType("text/html");
+        PrintWriter out = response.getWriter();
+        out.println(messageResponse);
+
+        request.getRequestDispatcher("index.html").include(request, response);
+        out.close();
+        response.reset();
 
     }
 
