@@ -26,8 +26,7 @@
                 <input class="control-label" type="text" name="from"/>
                 <label>to</label>
                 <input class="control-label" type="text" name="to"/>
-                <label>format</label>
-                <input class="control-label" type="text" name="format"/>
+                <input class="control-label" type="hidden" type="text" name="action" value="get"/>
                 <input type='submit' value='Make a get request'/>
             </form>
         </div>
@@ -62,24 +61,24 @@
             </div>
         </div>
     </div>
-    <div class="row">
-        <div class="col-12">
-            <a href="ChatServlet?from=1990-01-01&to=2021-01-01&format=text">
-                <i class="material-icons">refresh</i>
-            </a>
-        </div>
-        <div class="col-12">
-            <a href="ChatServlet?from=1990-01-01&to=2021-01-01&format=text">
-                <i class="material-icons">delete</i>
-            </a>
-        </div>
-        <div class="col-12">
-            <a href="ChatServlet?from=1990-01-01&to=2021-01-01&format=text">
-                <i class="material-icons">delete</i>
-            </a>
-        </div>
-    </div>
 </div>
 
+
+<div class="row">
+    <div class="col-12">
+        <a href="ChatServlet?from=1990-01-01&to=2021-01-01&format=text">
+            <i class="material-icons">refresh</i>
+        </a>
+    </div>
+</div>
+<div class="row">
+    <div class="col-12">
+        <form action="ChatServlet" method="get">
+            <input class="control-label" type="hidden" type="text" name="action" value="delete"/>
+            <input type='submit' value='Clear Chat'/>
+        </form>
+        </a>
+    </div>
+</div>
 </body>
 </html>

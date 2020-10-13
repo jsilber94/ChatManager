@@ -13,16 +13,22 @@ public class ChatServlet extends HttpServlet {
     final ChatManager chatManager = new ChatManager();
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
-        String from = request.getParameter("from");
-        String to = request.getParameter("to");
-        String format = request.getParameter("format");
 
-        List<String> messageResponse = determineResponse(from, to, format);
+        if ("delete".equalsIgnoreCase(request.getParameter("action"))) {
+            chatManager.clearChat();
+            response.setContentType("text/xml");
+            request.setAttribute("messages", new ArrayList<>());
+        } else {
+            String from = request.getParameter("from");
+            String to = request.getParameter("to");
+            String format = request.getParameter("format");
 
-        response.setContentType("text/xml");
-        request.setAttribute("messages", messageResponse);
+            List<String> messageResponse = determineResponse(from, to, format);
+
+            response.setContentType("text/xml");
+            request.setAttribute("messages", messageResponse);
+        }
         request.getRequestDispatcher("/index.jsp").forward(request, response);
-
     }
 
     protected void doPost(HttpServletRequest request, HttpServletResponse response) {
@@ -34,6 +40,7 @@ public class ChatServlet extends HttpServlet {
 
         response.setStatus(response.SC_NO_CONTENT);
     }
+
 
 
     private List<String> determineResponse(String from, String to, String format) {
