@@ -5,7 +5,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
+    <title>Chat Box</title>
 </head>
 <%-- Bootstrap CSS/JS --%>
 <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"
@@ -17,68 +17,105 @@
         crossorigin="anonymous"></script>
 
 <body>
+    <%--GET CHAT LOGS--%>
+    <div class="container">
+        <div class="jumbotron">
+            <div class="form-group">
+                <form action="ChatServlet" method="get">
+                    <label>From</label>
+                    <input class="control-label" type="text" name="from"/>
+                    <label>to</label>
+                    <input class="control-label" type="text" name="to"/>
+                    <input class="control-label" type="hidden" type="text" name="action" value="get"/>
+                    <input type='submit' value='Make a get request'/>
+                </form>
+            </div>
+        </div>
+    </div>
 
-<div class="container">
-    <div class="jumbotron">
-        <div class="form-group">
+    <%--DISPLAY ERROR MESSAGES--%>
+    <div>
+        ${errorMessage}
+    </div>
+
+    <%--SEND A MESSAGE--%>
+    <div class="container">
+        <div class="row no-gutters">
+            <div class="form-group">
+                <form action="ChatServlet" method="post">
+                    <label>User</label>
+                    <input class="control-label" type="text" name="user"/>
+                    <label>Message</label>
+                    <input class="control-label" type="text" name="message"/>
+                    <input type='submit' value='Make a post request'/>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <%--DISPLAY CHAT LOGS--%>
+    <div class="chat-panel">
+        <div class="row no-gutters">
+            <div class="col-md-3">
+                <div class="chat-bubble chat-bubble--left">
+
+                    <c:forEach var="message" items="${requestScope.messages}">
+                        <c:out value="${message}"/>
+                        <br/>
+                    </c:forEach>
+
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <%--REFRESH THE CHAT LOGS--%>
+    <div class="row">
+        <div class="col-12">
+            <a href="ChatServlet?from=1990-01-01&to=2021-01-01&format=text">
+                <label>Refresh chat</label>
+                <i class="material-icons">refresh</i>
+            </a>
+        </div>
+    </div>
+
+    <%--CLEAR THE CHAT--%>
+    <div class="row">
+        <div class="col-12">
             <form action="ChatServlet" method="get">
                 <label>From</label>
                 <input class="control-label" type="text" name="from"/>
                 <label>to</label>
                 <input class="control-label" type="text" name="to"/>
-                <input class="control-label" type="hidden" type="text" name="action" value="get"/>
-                <input type='submit' value='Make a get request'/>
+                <input class="control-label" type="hidden" type="text" name="action" value="delete"/>
+                <input type='submit' value='Clear Chat'/>
             </form>
+            </a>
         </div>
     </div>
-</div>
 
-
-<div class="container">
-    <div class="row no-gutters">
-        <div class="form-group">
-            <form action="ChatServlet" method="post">
-                <label>User</label>
-                <input class="control-label" type="text" name="user"/>
-                <label>Message</label>
-                <input class="control-label" type="text" name="message"/>
-                <input type='submit' value='Make a post request'/>
+    <%--DOWNLOAD CHATLOGS AS TEXT--%>
+    <div class="row">
+        <div class="col-12">
+            <form action="ChatServlet" method="get">
+                <input class="control-label" type="hidden" name="action" value="download"/>
+                <input class="control-label" type="hidden" name="type" value="txt"/>
+                <input type='submit' value='Download chat logs as text'/>
             </form>
+            </a>
         </div>
     </div>
-</div>
 
-<div class="chat-panel">
-    <div class="row no-gutters">
-        <div class="col-md-3">
-            <div class="chat-bubble chat-bubble--left">
-
-                <c:forEach var="message" items="${requestScope.messages}">
-                    <c:out value="${message}"/>
-                    </br>
-                </c:forEach>
-
-            </div>
+    <%--DOWNLOAD CHATLOGS AS XML--%>
+    <div class="row">
+        <div class="col-12">
+            <form action="ChatServlet" method="get">
+                <input class="control-label" type="hidden" name="action" value="download"/>
+                <input class="control-label" type="hidden" name="type" value="xml"/>
+                <input type='submit' value='Download chat logs as xml'/>
+            </form>
+            </a>
         </div>
     </div>
-</div>
-
-
-<div class="row">
-    <div class="col-12">
-        <a href="ChatServlet?from=1990-01-01&to=2021-01-01&format=text">
-            <i class="material-icons">refresh</i>
-        </a>
-    </div>
-</div>
-<div class="row">
-    <div class="col-12">
-        <form action="ChatServlet" method="get">
-            <input class="control-label" type="hidden" type="text" name="action" value="delete"/>
-            <input type='submit' value='Clear Chat'/>
-        </form>
-        </a>
-    </div>
-</div>
 </body>
 </html>
