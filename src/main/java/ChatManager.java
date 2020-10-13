@@ -2,6 +2,11 @@ import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * Chat Manager
+ *
+ * @author Jesse Silber
+ */
 public class ChatManager {
 
 
@@ -26,7 +31,7 @@ public class ChatManager {
     }
 
     public void clearChat(String from, String to) {
-        if (from == null || to == null)
+        if (from == null || to == null || from.equalsIgnoreCase("") || to.equalsIgnoreCase(""))
             messages = new ArrayList<>();
         else {
             List<Message> messagesToKeep = new ArrayList<>();
@@ -37,7 +42,6 @@ public class ChatManager {
             }
             messages = messagesToKeep;
         }
-
     }
 
     public String downloadLogs(String type) {

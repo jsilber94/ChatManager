@@ -14,7 +14,7 @@ import java.util.List;
 /**
  * Chat Servlet
  *
- * @author Jesse Silber 26993702
+ * @author Jesse Silber
  */
 @WebServlet(name = "ChatServlet")
 public class ChatServlet extends HttpServlet {
@@ -24,6 +24,7 @@ public class ChatServlet extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
+        List<String> messageResponse = null;
         determineProperHeaders(request);
         if ("delete".equalsIgnoreCase(request.getParameter("action"))) {
             String from = request.getParameter("from");
@@ -63,11 +64,15 @@ public class ChatServlet extends HttpServlet {
                 errorMessage = "From or To are empty. Please provide a date in the format of: YYYY-MM-DD";
             } else {
                 errorMessage = "";
-                List<String> messageResponse = determineResponse(from, to);
-                request.setAttribute("messages", messageResponse);
+                messageResponse = determineResponse(from, to);
             }
         }
+        if (messageResponse == null)
+            messageResponse = chatManager.getAllMessagesWithinRange();
+
+        request.setAttribute("messages", messageResponse);
         request.setAttribute("errorMessage", errorMessage);
+
         response.setContentType("text/html");
         request.getRequestDispatcher("/index.jsp").forward(request, response);
     }
@@ -86,6 +91,10 @@ public class ChatServlet extends HttpServlet {
         }
         response.setContentType("text/html");
         request.setAttribute("errorMessage", errorMessage);
+
+        List<String> messageResponse = chatManager.getAllMessagesWithinRange();
+        request.setAttribute("messages", messageResponse);
+
         request.getRequestDispatcher("/index.jsp").forward(request, response);
     }
 
