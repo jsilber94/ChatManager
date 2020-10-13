@@ -1,4 +1,5 @@
 import java.time.LocalDate;
+import java.time.LocalTime;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -21,10 +22,22 @@ public class ChatManager {
     }
 
     public List<String> getAllMessagesWithinRange(String from, String to) {
+
+        String fromDate = from.substring(0,from.indexOf("T"));
+        String fromTo = to.substring(0,from.indexOf("T"));
+
+        String fromTime = from.substring(from.indexOf("T")+1);
+        String toTime = from.substring(to.indexOf("T")+1);
+
         List<Message> messagesToSend = new ArrayList<>();
         for (Message message : messages) {
-            if (LocalDate.parse(message.getDate().toString()).isAfter(LocalDate.parse(from)) || LocalDate.parse(message.getDate().toString()).isBefore(LocalDate.parse(to)))
+            if (LocalDate.parse(message.getDate().toString()).isAfter(LocalDate.parse(fromDate)) || LocalDate.parse(message.getDate().toString()).isBefore(LocalDate.parse(fromTo)))
                 messagesToSend.add(message);
+            else if((LocalDate.parse(message.getDate().toString())==(LocalDate.parse(fromDate)) || LocalDate.parse(message.getDate().toString())==(LocalDate.parse(fromTo)))){
+                if(LocalTime.parse(message.getTime()).isAfter(LocalTime.parse(fromTime)) || LocalTime.parse(message.getTime()).isBefore(LocalTime.parse(toTime))){
+                    messagesToSend.add(message);
+                }
+            }
         }
 
         return formatMessage(messagesToSend);
@@ -46,7 +59,7 @@ public class ChatManager {
 
     public String downloadLogs(String type) {
         StringBuilder messagesToSend = new StringBuilder();
-        if (type.equals("xml")) {
+        if (type != null && type.equals("xml")) {
             messagesToSend.append("<?xml version=\"1.0\" encoding=\"UTF-8\"?>");
             messagesToSend.append("<Messages>");
             for (Message message : messages) {

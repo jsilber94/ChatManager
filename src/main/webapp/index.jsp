@@ -34,7 +34,7 @@
                         <div class="input-group-prepend">
                             <span class="input-group-text">From</span>
                         </div>
-                        <input type="text" class="form-control" placeholder="----/--/--" name="from">
+                        <input type="datetime-local" class="form-control" name="from">
                     </div>
                 </div>
                 <div class="col-5">
@@ -42,7 +42,7 @@
                         <div class="input-group-prepend">
                             <span class="input-group-text">To</span>
                         </div>
-                        <input type="text" class="form-control" placeholder="----/--/--" name="to">
+                        <input type="datetime-local" class="form-control" name="to">
                     </div>
                 </div>
                 <div class="col-2">
@@ -99,7 +99,7 @@
         <%--REFRESH THE CHAT LOGS--%>
         <div class="row">
             <div class="col">
-                <a href="ChatServlet?from=1990-01-01&to=2021-01-01&format=text">
+                <a href="ChatServlet?from=1990-01-01T04:55&to=2021-01-01T04:55&format=text">
                     <label>Refresh chat</label>
                     <i class="material-icons">refresh</i>
                 </a>
@@ -118,7 +118,7 @@
                         <div class="input-group-prepend">
                             <span class="input-group-text">From</span>
                         </div>
-                        <input type="text" class="form-control" placeholder="----/--/--" name="from">
+                        <input type="datetime-local" class="form-control" name="from">
                     </div>
                 </div>
                 <div class="col-5">
@@ -126,7 +126,7 @@
                         <div class="input-group-prepend">
                             <span class="input-group-text">To</span>
                         </div>
-                        <input type="text" class="form-control" placeholder="----/--/--" name="to">
+                        <input type="datetime-local" class="form-control" name="to">
                     </div>
                 </div>
                 <div class="col-2">
