@@ -99,7 +99,7 @@
         <%--REFRESH THE CHAT LOGS--%>
         <div class="row">
             <div class="col">
-                    <a href="ChatServlet?from=1990-01-01&to=2021-01-01&format=text">
+                    <a href="ChatServlet?from=1990-01-01T04:55&to=2021-01-01T04:55&format=text">
                         <label class="refresh">Refresh chat</label>
                         <i class="material-icons">refresh</i>
                     </a>
