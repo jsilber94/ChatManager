@@ -34,7 +34,7 @@
                         <div class="input-group-prepend">
                             <span class="input-group-text span-label">From</span>
                         </div>
-                        <input type="text" class="form-control" placeholder="----/--/--" name="from">
+                        <input type="datetime-local" class="form-control" name="from">
                     </div>
                 </div>
                 <div class="col-5">
@@ -42,7 +42,7 @@
                         <div class="input-group-prepend">
                             <span class="input-group-text">To</span>
                         </div>
-                        <input type="text" class="form-control" placeholder="----/--/--" name="to">
+                        <input type="datetime-local" class="form-control" name="to">
                     </div>
                 </div>
                 <div class="col-2">
@@ -124,7 +124,7 @@
                         <div class="input-group-prepend">
                             <span class="input-group-text">From</span>
                         </div>
-                        <input type="text" class="form-control" placeholder="----/--/--" name="from">
+                        <input type="datetime-local" class="form-control" name="from">
                     </div>
                 </div>
                 <div class="col-5">
@@ -132,7 +132,7 @@
                         <div class="input-group-prepend">
                             <span class="input-group-text">To</span>
                         </div>
-                        <input type="text" class="form-control" placeholder="----/--/--" name="to">
+                        <input type="datetime-local" class="form-control" name="to">
                     </div>
                 </div>
                 <div class="col-2">
