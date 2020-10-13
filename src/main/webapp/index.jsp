@@ -2,7 +2,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" data-theme="light">
 <head>
     <meta charset="UTF-8">
     <title>Chat Box</title>
@@ -32,7 +32,7 @@
                 <div class="col-5">
                     <div class="input-group">
                         <div class="input-group-prepend">
-                            <span class="input-group-text">From</span>
+                            <span class="input-group-text span-label">From</span>
                         </div>
                         <input type="text" class="form-control" placeholder="----/--/--" name="from">
                     </div>
@@ -85,24 +85,30 @@
     <div class="jumbotron">
         <%--DISPLAY CHAT LOGS--%>
         <div class="chat-panel">
-            <div class="row no-gutters">
-                <div class="col-6">
-                    <div class="chat-bubble chat-bubble--left">
-                        <c:forEach var="message" items="${requestScope.messages}">
+            <c:forEach var="message" items="${requestScope.messages}">
+                <div class="row no-gutters">
+                    <div class="col-6">
+                        <div class="chat-bubble chat-bubble--left">
                             <c:out value="${message}"/>
-                            <br/>
-                        </c:forEach>
+                        </div>
+                        <br/>
                     </div>
                 </div>
-            </div>
+            </c:forEach>
         </div>
         <%--REFRESH THE CHAT LOGS--%>
         <div class="row">
             <div class="col">
-                <a href="ChatServlet?from=1990-01-01&to=2021-01-01&format=text">
-                    <label>Refresh chat</label>
-                    <i class="material-icons">refresh</i>
-                </a>
+                    <a href="ChatServlet?from=1990-01-01&to=2021-01-01&format=text">
+                        <label class="refresh">Refresh chat</label>
+                        <i class="material-icons">refresh</i>
+                    </a>
+            </div>
+            <div class="col">
+                <div class="toggle-container">
+                    <label class="toggle">Toggle Theme</label>
+                    <input type="checkbox" id="switch" name="theme" /><label class="toggle-switch" for="switch">Toggle</label>
+                </div>
             </div>
         </div>
     </div>
@@ -160,5 +166,27 @@
         </div>
     </div>
 </div>
+
+<script>
+    var checkbox = document.querySelector('input[name=theme]');
+
+    checkbox.addEventListener('change', function () {
+        if (this.checked) {
+            trans()
+            document.documentElement.setAttribute('data-theme', 'dark')
+        } else {
+            trans()
+            document.documentElement.setAttribute('data-theme', 'light')
+        }
+    })
+
+    let trans = () => {
+        document.documentElement.classList.add('transition');
+        window.setTimeout(() => {
+            document.documentElement.classList.remove('transition')
+        }, 1000)
+    }
+</script>
+
 </body>
 </html>

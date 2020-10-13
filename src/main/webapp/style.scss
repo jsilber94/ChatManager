@@ -1,17 +1,57 @@
+html {
+  font-family: 'Montserrat';
+
+  --bg: #FCFCFC;
+  --bg-panel: #EBEBEB;
+  --color-button: #03A9F4;
+  --color-label: #495057;
+  --color-bubble: #000;
+  --color-bubble-bg: #B3E5FC;
+  --color-highlight: #333333;
+
+}
+
+html[data-theme='dark'] {
+  font-family: 'Montserrat';
+
+  --bg: #333333;
+  --bg-panel: #434343;
+  --color-button: #354854;
+  --color-label: #172229;
+  --color-bubble: #fff;
+  --color-bubble-bg: #4b6b69;
+  --color-highlight: #03A9F4;
+
+}
+
+.jumbotron {
+  background-color: var(--bg-panel);
+}
+
+.span-label {
+  color: var(--color-label);
+}
+
+body {
+  background-color: var(--bg);
+
+}
+
 .container {
   margin: 60px auto;
-  background: #fff;
+  background: var(--bg-panel);
   padding: 0;
   border-radius: 7px;
 }
 
 .chat-bubble {
   padding: 10px 14px;
-  background: #eee;
+  background-color: var(--color-bubble-bg);
+  color: var(--color-bubble);
   margin: 10px 30px;
   border-radius: 9px;
   position: relative;
-  animation: fadeIn 1s ease-in;
+  animation: fadeIn 0.33s ease-in;
 
   &:after {
     content: '';
@@ -52,16 +92,12 @@
   }
 }
 
-
-.offset-md-9 {
-  chat-bubble {
-    background: blue;
-    color: #fff;
-  }
+.btn-dark {
+  background: var(--color-button);
 }
 
 .chat-box-tray {
-  background: #eee;
+  //background: #eee;
   display: flex;
   align-items: baseline;
   padding: 10px 15px;
@@ -88,4 +124,66 @@
 .main-form {
   width: 800px;
   margin: auto;
+}
+
+label.refresh {
+  color: var(--color-highlight);
+}
+
+i {
+  color: var(--color-highlight);
+}
+
+label.toggle {
+  color: var(--color-highlight);
+}
+
+input[type=checkbox]{
+  height: 0;
+  width: 0;
+  visibility: hidden;
+}
+
+label.toggle-switch {
+  cursor: pointer;
+  text-indent: -9999px;
+  width: 52px;
+  height: 27px;
+  background: grey;
+  float: left;
+  border-radius: 100px;
+  position: relative;
+}
+
+label.toggle-switch:after {
+  content: '';
+  position: absolute;
+  top: 3px;
+  left: 3px;
+  width: 20px;
+  height: 20px;
+  background: #fff;
+  border-radius: 90px;
+  transition: 0.3s;
+}
+
+input:checked + label {
+  background: var(--color-highlight);
+}
+
+input:checked + label.toggle-switch:after {
+  left: calc(100% - 5px);
+  transform: translateX(-100%);
+}
+
+label.toggle-switch:active:after {
+  width: 45px;
+}
+
+html.transition,
+html.transition *,
+html.transition *:before,
+html.transition *:after {
+  transition: all 750ms !important;
+  transition-delay: 0 !important;
 }
