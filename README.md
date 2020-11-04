@@ -1,1 +1,1 @@
-# SOEN387Assignment1
+# ChatManager
